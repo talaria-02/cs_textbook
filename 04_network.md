@@ -127,7 +127,8 @@ sequenceDiagram
 ### 2. HTTP의 진화 (Evolution)
 *   **HTTP/1.1**: Keep-Alive로 연결 재사용. 하지만 **HOL(Head-of-Line) Blocking** 문제 존재 (앞 요청 처리가 늦어지면 뒤도 다 밀림).
 *   **HTTP/2**: **Multiplexing** 도입. 하나의 연결로 여러 요청을 동시에 스트림 단위로 주고받아 HOL Blocking 해결. 헤더 압축(HPACK) 지원.
-*   **HTTP/3**: TCP 버리고 **UDP 기반의 QUIC** 프로토콜 사용. TCP의 태생적 느림(Handshake, 재전송 지연)을 극복.
+*   **HTTP/3**: TCP를 버리고 **QUIC** 프로토콜(UDP 기반)을 사용합니다.
+    *   **특징**: UDP 위에서 **자체적으로 순서 보장 및 재전송(Reliability)**을 구현하여 신뢰성을 확보함과 동시에, TCP의 무거운 3-way Handshake 과정을 단축(0-RTT)합니다.
 
 ### 3. 로드 밸런싱 알고리즘 (L4/L7)
 *   **Round Robin**: 순서대로 하나씩. (서버 스펙이 동일할 때 적절)

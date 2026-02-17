@@ -110,8 +110,8 @@ SELECT * FROM Users A LEFT JOIN Orders B ON A.id = B.user_id;
 ## 🔬 Deep Dive: DB 엔진의 심장부
 
 ### 1. 인덱스 내부 구조: B-Tree vs B+Tree
-DBMS는 왜 그냥 트리가 아닌 **B+Tree**를 쓸까요?
-*   **B-Tree**: 모든 노드가 데이터(Value)를 저장합니다.
+대부분의 현대 DBMS(Oracle, MySQL InnoDB 등)는 **B+Tree**를 사용합니다. 왜일까요?
+*   **B-Tree**: 모든 노드가 데이터(Value)를 저장합니다. (파일 시스템 등에서 사용)
 *   **B+Tree**: **리프 노드(Leaf Node)**에만 실제 데이터가 저장되고, 내부 노드(Internal Node)는 인덱스(Key) 역할만 합니다. 또한 리프 노드끼리 **연결 리스트(Linked List)**로 이어져 있습니다.
     *   **장점 1**: 한번에 더 많은 Key를 메모리에 올릴 수 있어(Fan-out이 큼) 트리의 높이가 낮아집니다. (Disk I/O 감소)
     *   **장점 2**: 리프 노드가 연결되어 있어 **범위 검색(Range Scan)**이 매우 빠릅니다. (풀스캔 유리)
